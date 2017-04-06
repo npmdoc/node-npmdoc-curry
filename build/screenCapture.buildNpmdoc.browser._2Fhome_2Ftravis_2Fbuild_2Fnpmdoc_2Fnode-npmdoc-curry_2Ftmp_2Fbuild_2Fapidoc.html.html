@@ -1,0 +1,187 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/dominictarr/curry">curry (v1.2.0)</a>
+</h1>
+<h4>flexible but simple curry function</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.curry">module curry</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.curry.adapt">
+            function <span class="apidocSignatureSpan">curry.</span>adapt
+            <span class="apidocSignatureSpan">(fn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.curry.adaptTo">
+            function <span class="apidocSignatureSpan">curry.</span>adaptTo
+            <span class="apidocSignatureSpan">(a, b)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.curry.to">
+            function <span class="apidocSignatureSpan">curry.</span>to
+            <span class="apidocSignatureSpan">(a, b)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.curry" id="apidoc.module.curry">module curry</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.curry.adapt" id="apidoc.element.curry.adapt">
+        function <span class="apidocSignatureSpan">curry.</span>adapt
+        <span class="apidocSignatureSpan">(fn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">adapt = function (fn){
+    return curry.adaptTo(fn.length, fn)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+It's a (sad?) fact that JavaScript functions are often written to take the 'context' object as the first argument
+.
+
+With curried functions, of course, we want it to be the last object.  `curry.adapt` shifts the context to the last argument,
+to give us a hand with this:
+
+```javascript
+var delve = require('delve');
+var delveC = curry.<span class="apidocCodeKeywordSpan">adapt</span>(delve);
+
+var getDataFromResponse = delveC('response.body.data');
+getDataFromResponse({ response: { body: { data: { x: 2 }} } }); //= { x: 2 }
+```
+
+### curry.adaptTo
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.curry.adaptTo" id="apidoc.element.curry.adaptTo">
+        function <span class="apidocSignatureSpan">curry.</span>adaptTo
+        <span class="apidocSignatureSpan">(a, b)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">adaptTo = function (a, b){ return processInvocation(fn, concatArgs(args, arguments), totalArity) }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### curry.adaptTo
+
+Like `curry.adapt`, but the arity explicitly provided:
+
+```javascript
+var _ = require('lodash');
+var map = curry.<span class="apidocCodeKeywordSpan">adaptTo</span>(2, _.map);
+var mapInc = map(function(a){ return a + 1 })
+
+mapInc([1, 2, 3]) //= [2, 3, 4]
+```
+
+# installation
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.curry.to" id="apidoc.element.curry.to">
+        function <span class="apidocSignatureSpan">curry.</span>to
+        <span class="apidocSignatureSpan">(a, b)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">to = function (a, b){ return processInvocation(fn, concatArgs(args, arguments), totalArity) }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+```javascript
+var sum = function(){
+	var nums = [].slice.call(arguments);
+	return nums.reduce(function(a, b){ return a + b });
+}
+
+var sum3 = curry.<span class="apidocCodeKeywordSpan">to</span>(3, sum);
+var sum4 = curry.to(4, sum);
+
+sum3(1, 2)(3) //= 6
+sum4(1)(2)(3, 4) //= 10
+```
+
+### curry.adapt
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
