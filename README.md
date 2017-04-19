@@ -1,9 +1,14 @@
-# api documentation for  [curry (v1.2.0)](https://github.com/dominictarr/curry)  [![npm package](https://img.shields.io/npm/v/npmdoc-curry.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-curry) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-curry.svg)](https://travis-ci.org/npmdoc/node-npmdoc-curry)
+# npmdoc-curry
+
+#### api documentation for  [curry (v1.2.0)](https://github.com/dominictarr/curry)  [![npm package](https://img.shields.io/npm/v/npmdoc-curry.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-curry) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-curry.svg)](https://travis-ci.org/npmdoc/node-npmdoc-curry)
+
 #### flexible but simple curry function
 
-[![NPM](https://nodei.co/npm/curry.png?downloads=true)](https://www.npmjs.com/package/curry)
+[![NPM](https://nodei.co/npm/curry.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/curry)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-curry/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-curry_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-curry/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-curry/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-curry/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-curry/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-curry/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-curry/build/screenCapture.npmPackageListing.svg)
 
@@ -17,16 +22,14 @@
 
 {
     "author": {
-        "name": "Dominic Tarr",
-        "email": "dominic.tarr@gmail.com"
+        "name": "Dominic Tarr"
     },
     "bugs": {
         "url": "https://github.com/dominictarr/curry/issues"
     },
     "contributors": [
         {
-            "name": "Hugh FD Jackson",
-            "email": "hughfdjackson@googlemail.com"
+            "name": "Hugh FD Jackson"
         }
     ],
     "dependencies": {},
@@ -47,17 +50,14 @@
     "main": "./curry",
     "maintainers": [
         {
-            "name": "dominictarr",
-            "email": "dominic.tarr@gmail.com"
+            "name": "dominictarr"
         },
         {
-            "name": "hughfdjackson",
-            "email": "hughfdjackson@googlemail.com"
+            "name": "hughfdjackson"
         }
     ],
     "name": "curry",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/dominictarr/curry.git"
@@ -85,97 +85,6 @@
     },
     "version": "1.2.0"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module curry](#apidoc.module.curry)
-1.  [function <span class="apidocSignatureSpan">curry.</span>adapt (fn)](#apidoc.element.curry.adapt)
-1.  [function <span class="apidocSignatureSpan">curry.</span>adaptTo (a, b)](#apidoc.element.curry.adaptTo)
-1.  [function <span class="apidocSignatureSpan">curry.</span>to (a, b)](#apidoc.element.curry.to)
-
-
-
-# <a name="apidoc.module.curry"></a>[module curry](#apidoc.module.curry)
-
-#### <a name="apidoc.element.curry.adapt"></a>[function <span class="apidocSignatureSpan">curry.</span>adapt (fn)](#apidoc.element.curry.adapt)
-- description and source-code
-```javascript
-adapt = function (fn){
-    return curry.adaptTo(fn.length, fn)
-}
-```
-- example usage
-```shell
-...
-It's a (sad?) fact that JavaScript functions are often written to take the 'context' object as the first argument.
-
-With curried functions, of course, we want it to be the last object.  'curry.adapt' shifts the context to the last argument,
-to give us a hand with this:
-
-'''javascript
-var delve = require('delve');
-var delveC = curry.adapt(delve);
-
-var getDataFromResponse = delveC('response.body.data');
-getDataFromResponse({ response: { body: { data: { x: 2 }} } }); //= { x: 2 }
-'''
-
-### curry.adaptTo
-...
-```
-
-#### <a name="apidoc.element.curry.adaptTo"></a>[function <span class="apidocSignatureSpan">curry.</span>adaptTo (a, b)](#apidoc.element.curry.adaptTo)
-- description and source-code
-```javascript
-adaptTo = function (a, b){ return processInvocation(fn, concatArgs(args, arguments), totalArity) }
-```
-- example usage
-```shell
-...
-
-### curry.adaptTo
-
-Like 'curry.adapt', but the arity explicitly provided:
-
-'''javascript
-var _ = require('lodash');
-var map = curry.adaptTo(2, _.map);
-var mapInc = map(function(a){ return a + 1 })
-
-mapInc([1, 2, 3]) //= [2, 3, 4]
-'''
-
-# installation
-...
-```
-
-#### <a name="apidoc.element.curry.to"></a>[function <span class="apidocSignatureSpan">curry.</span>to (a, b)](#apidoc.element.curry.to)
-- description and source-code
-```javascript
-to = function (a, b){ return processInvocation(fn, concatArgs(args, arguments), totalArity) }
-```
-- example usage
-```shell
-...
-
-'''javascript
-var sum = function(){
-	var nums = [].slice.call(arguments);
-	return nums.reduce(function(a, b){ return a + b });
-}
-
-var sum3 = curry.to(3, sum);
-var sum4 = curry.to(4, sum);
-
-sum3(1, 2)(3) //= 6
-sum4(1)(2)(3, 4) //= 10
-'''
-
-### curry.adapt
-...
 ```
 
 
